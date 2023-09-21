@@ -196,26 +196,30 @@ function verDatosProducto() {
     (producto) => producto.id === consultaUsuario
   );
   if (buscandoProducto) {
-    alert(`Nombre: ${buscandoProducto.nombre}
-    Categoria: ${buscandoProducto.category}
-    Fabricante: ${buscandoProducto.manufacturer}
-    Precio: ${buscandoProducto.price}
-    Stock: ${buscandoProducto.stock}`);
+    alert(
+      `Nombre: ${buscandoProducto.nombre}\nCategoria: ${buscandoProducto.category}\nFabricante: ${buscandoProducto.manufacturer}\nPrecio: ${buscandoProducto.price}\nStock: ${buscandoProducto.stock}`
+    );
   } else {
     alert("Producto no existe");
+    verDatosProducto();
   }
 }
 
 function filtrarPorCategoria() {
-  let fabricante = prompt(
-    "Ingrese el nombre del fabricante a filtrar:\nLogitech\nRazer\nSteelSeries\nASUS\nHyperX\nCorsair\nLG\nSony\nMicrosoft\n"
+  let consultaFabricante = prompt(
+    "Ingrese el nombre del fabricante a filtrar:\nLogitech\nRazer\nSteelSeries\nASUS\nHyperX\nCorsair\nLG\nSony\nMicrosoft"
+  ).toUpperCase();
+
+  let fabricanteExistentes = productosGamer.map((producto) =>
+    producto.manufacturer.toUpperCase()
   );
-  let filtrarPorCategoria = productosGamer.filter(
-    (producto) => producto.manufacturer === fabricante
-  );
-  if (filtrarPorCategoria.length === 0) {
-    alert(listarProductos(filtrarPorCategoria));
-  } else {
-    alert("Fabricante no esta en nuestro stock");
+  if (!fabricanteExistentes.includes(consultaFabricante)) {
+    alert("El fabricante ingresado no existe en la lista");
+    return;
   }
+
+  let categoriaProductos = productosGamer.filter(
+    (producto) => producto.manufacturer.toUpperCase() == consultaFabricante
+  );
+  alert(listarProductos(categoriaProductos));
 }
