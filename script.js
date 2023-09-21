@@ -184,7 +184,7 @@ function finalizarCompra(carrito) {
     alert("Primero debe agregar productos al carrito");
   } else {
     let total = carrito.reduce((acum, producto) => acum + producto.subtotal, 0);
-    alert("El total a pagar es " + total);
+    alert(`El total a pagar es   ${total}`);
     alert("Gracias por su compra");
   }
 }
